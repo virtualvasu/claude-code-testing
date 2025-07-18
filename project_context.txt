@@ -1,6 +1,8 @@
 Project structure:
 .
+├── CLAUDE_GENERATED.md
 ├── README.md
+├── claude_generator.py
 ├── codebase_files.txt
 ├── eslint.config.js
 ├── index.html
@@ -22,7 +24,7 @@ Project structure:
 ├── tsconfig.node.json
 └── vite.config.ts
 
-4 directories, 18 files
+4 directories, 20 files
 Package.json content:
 {
   "name": "claude-webapp",
