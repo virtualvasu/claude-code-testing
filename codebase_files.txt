@@ -1,0 +1,5 @@
+./src/vite-env.d.ts
+./src/App.tsx
+./src/main.tsx
+./eslint.config.js
+./vite.config.ts
