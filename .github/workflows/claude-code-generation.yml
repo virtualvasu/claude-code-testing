@@ -1,0 +1,28 @@
+name: Claude Code Generation
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created]
+
+jobs:
+  generate_code:
+    if: |
+      github.event.issue.labels.*.name contains 'claude-generate' ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/claude generate'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Claude Code Generator
+        uses: aws-actions/amazon-bedrock-chat@v1
+        with:
+          model: anthropic.claude-3-sonnet-20240229-v1:0
+          input: |
+            {{ github.event.issue.body || github.event.comment.body }}
+          max_tokens_to_sample: 1024
+          temperature: 0.3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
